@@ -1,3 +1,7 @@
+*{font-family: 'Orbitron', sans-serif;}
+
+
+
 .main-container {
 }
 .elements {
@@ -47,3 +51,11 @@ button:hover{
     background-color: aqua;
     
 }
+span{
+  font-size: 42px;
+  float: right;
+  padding: 10px;
+
+}
+
+
