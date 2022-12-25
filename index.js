@@ -1,31 +1,82 @@
-let add = document.querySelector('#add'),
-minus = document.querySelector('#minus'),
-multiply = document.querySelector('#multiply'),
-divide = document.querySelector('#divide'),
-equal = document.querySelector('#equal'),
-clear = document.querySelector('#clear'),
-value = document.querySelector('#value');
+var memory = "0",
+  current = "0",
+  operation = 0;
+const maxChar = 10;
 
-let result = 0;
- value.innerText=result;
+const display = document.querySelector(".display p");
 
+function addValue(dig) {
+  if (eval(current) === 0 && current.indexOf(".") === -1) {
+    current = dig;
+  } else {
+    current += dig;
+  }
 
-const Render = () => {
-    value.innerText=result;
-
+  display.innerHTML = current;
 }
 
+function addDecimal() {
+  if (current.length === 0) {
+    current = "0.";
+  } else if (current.indexOf(".") === -1) {
+    current += ".";
+  }
 
-const Clear = () =>{
-    result=0;
-    Render()
+  display.innerHTML = current;
 }
-console.log(Clear)
 
+function allClear() {
+  current = "0";
+  Operation = 0;
+  memory = "0";
 
+  display.innerHTML = current;
+}
 
+function addOperation(op) {
+  if (operation !== 0) {
+    calculate();
 
+    if (op.indexOf("*") > -1) {
+      operation = 1;
+    }
+    if (op.indexOf("+") > -1) {
+      operation = 3;
+    }
+    if (op.indexOf("-") > -1) {
+      operation = 4;
+    }
 
+    memory = current;
+    current = "";
 
+    display.innerHTML = current;
+  }
 
-clear.addEventListener('click',Clear);
+  function calculate() {
+    if (operation === 1) {
+      current = eval(memory) * eval(current);
+    }
+
+    if (operation === 2) {
+      if (eval(current) !== 0) {
+        current = eval(memory) / eval(current);
+      } else {
+        current = "Error";
+      }
+    }
+
+    if (operation === 3) {
+      current = eval(memory) + eval(current);
+    }
+    if (operation === 4) {
+      current = eval(memory) - eval(current);
+    }
+
+    current = current + "";
+    operation = 0;
+    memory = "0";
+
+    display.innerHTML = current;
+  }
+}
