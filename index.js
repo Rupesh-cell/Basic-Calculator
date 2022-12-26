@@ -76,7 +76,7 @@ function addOperation(op) {
     current = current + "";
     operation = 0;
     memory = "0";
-
+    IDBKeyRange;
     display.innerHTML = current;
   }
 }
